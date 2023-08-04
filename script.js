@@ -1,25 +1,16 @@
 let playerScore = 0;
 let computerScore = 0;
 const winningScore = 5;
+let playerChoice = null;
 
 const rockButton = document.getElementById("rock");
 const paperButton = document.getElementById("paper");
 const scissorsButton = document.getElementById("scissors");
 
-rockButton.addEventListener("mouseover", highlightButton);
-rockButton.addEventListener("mouseout", removeHighlight);
+const playerSign = document.getElementById("sign-player");
+const computerSign = document.getElementById("sign-computer");
 
-paperButton.addEventListener("mouseover", highlightButton);
-paperButton.addEventListener("mouseout", removeHighlight);
 
-scissorsButton.addEventListener("mouseover", highlightButton);
-scissorsButton.addEventListener("mouseout", removeHighlight);
-
-let playerChoice = null;
-
-rockButton.addEventListener("click", handleButtonClick);
-paperButton.addEventListener("click", handleButtonClick);
-scissorsButton.addEventListener("click", handleButtonClick);
 
 
 function highlightButton (e) {
@@ -41,8 +32,31 @@ function getComputerChoice() {
 
 function handleButtonClick(e) {
     const choice = e.target.getAttribute("data-choice");
+    
     if(choice) {
         playerChoice = choice;
+        console.log(playerChoice);
+        const computerChoice = getComputerChoice();
+        const result = compareChoices(playerChoice, computerChoice);
+        updateResultText(result, playerChoice, computerChoice);
+        
+
+        updateIcons(playerSign, playerChoice);
+        updateIcons(computerSign, computerChoice);
+
+    }
+
+}
+
+function updateIcons(element, choice) {
+    if(choice == "rock") {
+        element.textContent = "✊";
+    } else if(choice == "paper") {
+        element.textContent = "✋";
+    } else if(choice == "scissors") {
+        element.textContent = "✌";
+    } else {
+        element.textContent = "❔";
     }
 }
 
@@ -52,6 +66,13 @@ function updateScores() {
     
     playerScoreElement.textContent = `Player: ${playerScore}`;
     computerScoreElement.textContent = `Computer: ${computerScore}`;
+
+    if (playerScore >= winningScore || computerScore >= winningScore) {
+        rockButton.removeEventListener("click", handleButtonClick);
+        paperButton.removeEventListener("click", handleButtonClick);
+        scissorsButton.removeEventListener("click", handleButtonClick);
+    }
+
 }
 
 function compareChoices(playerChoice, computerChoice) {
@@ -86,6 +107,30 @@ function updateResultText(result, playerChoice, computerChoice) {
         resultText.textContent = "It's a tie!";
         resultText2.textContent = "No points!"
     }
+
+    if(playerScore >= winningScore) {
+        resultText.textContent = "Congratulations! You win the match!";
+        resultText2.textContent = "";
+    } else if(computerScore >= winningScore) {
+        resultText.textContent = "Oops! Computer wins the match!";
+        resultText2.textContent = "";
+    }
 }
+
+
+rockButton.addEventListener("mouseover", highlightButton);
+rockButton.addEventListener("mouseout", removeHighlight);
+
+paperButton.addEventListener("mouseover", highlightButton);
+paperButton.addEventListener("mouseout", removeHighlight);
+
+scissorsButton.addEventListener("mouseover", highlightButton);
+scissorsButton.addEventListener("mouseout", removeHighlight);
+
+rockButton.addEventListener("click", handleButtonClick);
+paperButton.addEventListener("click", handleButtonClick);
+scissorsButton.addEventListener("click", handleButtonClick);
+
+
 
 updateScores();
