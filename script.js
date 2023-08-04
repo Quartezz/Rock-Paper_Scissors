@@ -10,7 +10,9 @@ const scissorsButton = document.getElementById("scissors");
 const playerSign = document.getElementById("sign-player");
 const computerSign = document.getElementById("sign-computer");
 
-
+const modal = document.getElementById("modal");
+const modalMessage = document.getElementById("modal-message");
+const playAgainButton = document.getElementById("play-again-button");
 
 
 function highlightButton (e) {
@@ -67,11 +69,7 @@ function updateScores() {
     playerScoreElement.textContent = `Player: ${playerScore}`;
     computerScoreElement.textContent = `Computer: ${computerScore}`;
 
-    if (playerScore >= winningScore || computerScore >= winningScore) {
-        rockButton.removeEventListener("click", handleButtonClick);
-        paperButton.removeEventListener("click", handleButtonClick);
-        scissorsButton.removeEventListener("click", handleButtonClick);
-    }
+    
 
 }
 
@@ -115,8 +113,40 @@ function updateResultText(result, playerChoice, computerChoice) {
         resultText.textContent = "Oops! Computer wins the match!";
         resultText2.textContent = "";
     }
+
+    if (playerScore >= winningScore) {
+        modalMessage.textContent = "Congratulations! You won the match!";
+        showModal();
+    } else if (computerScore >= winningScore) {
+        modalMessage.textContent = "Oops! Computer won the match!";
+        showModal();
+    }
+
 }
 
+function showModal() {
+    modal.style.display = "block";
+}
+
+function hideModal() {
+    modal.style.display = "none";
+}
+
+playAgainButton.addEventListener("click", () => {
+    playerScore = 0;
+    computerScore = 0;
+    playerChoice = null;
+    updateScores();
+    updateIcons(playerSign, "default"); 
+    updateIcons(computerSign, "default"); 
+    hideModal(); 
+});
+
+modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        hideModal();
+    }
+});
 
 rockButton.addEventListener("mouseover", highlightButton);
 rockButton.addEventListener("mouseout", removeHighlight);
@@ -130,7 +160,3 @@ scissorsButton.addEventListener("mouseout", removeHighlight);
 rockButton.addEventListener("click", handleButtonClick);
 paperButton.addEventListener("click", handleButtonClick);
 scissorsButton.addEventListener("click", handleButtonClick);
-
-
-
-updateScores();
