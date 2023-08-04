@@ -39,27 +39,28 @@ function game(playerSelection, computerSelection) {
 
 }
 
-function fiveRounds() {
 
-    let playerChoice = null;
-    let computerChoice = null;
-    let gamepoints = 0;
-    for(let i = 0; i < 5; i++) {
-        playerChoice = prompt("Choose rock, paper or scissors!");
-        computerChoice = getComputerChoice();
-        result = game(playerChoice, computerChoice);
-        gamepoints = gamepoints + result;
-    }
 
-    console.log(gamepoints)
 
-    if(gamepoints == 0) {
-        return "It's a tie!"
-    } else if(gamepoints > 0) {
-        return "You win!"
-    } else {
-        return "You lost!"
-    }
+const rockButton = document.getElementById("rock")
+const paperButton = document.getElementById("paper")
+const scissorsButton = document.getElementById("scissors")
+
+rockButton.addEventListener("mouseover", highlightButton);
+rockButton.addEventListener("mouseout", removeHighlight);
+
+paperButton.addEventListener("mouseover", highlightButton);
+paperButton.addEventListener("mouseout", removeHighlight);
+
+scissorsButton.addEventListener("mouseover", highlightButton);
+scissorsButton.addEventListener("mouseout", removeHighlight);
+
+function highlightButton (e) {
+    e.target.style.backgroundColor = "#f0f0f0";
 }
 
-console.log(fiveRounds());
+function removeHighlight (e) {
+    e.target.style.backgroundColor = "";
+}
+
+
