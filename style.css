@@ -17,7 +17,6 @@ body {
 .title {
     font-size: 64px;
     color: yellow;
-    font-family: 'Press Start 2P', cursive;
 }
 
 .center {
@@ -38,6 +37,7 @@ h1 {
 
 .sign {
     font-size: 128px;
+    pointer-events: none;
 }
 
 .buttons-container {
@@ -47,14 +47,14 @@ h1 {
     margin: 32px 0 128px 0;
 }
 
-.button {
+button {
     width: 160px;
     height: 160px;
     border-radius: 10px;
     background-color: darkgray;
 }
 
-.button:hover {
+button:hover {
     cursor: pointer;
 }
 
