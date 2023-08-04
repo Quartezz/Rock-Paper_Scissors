@@ -20,27 +20,30 @@
 
         <div class="score-container">
             <div class="score-box">
-                <div class="sign">❔</div>
+                <div class="sign" id="sign-player">❔</div>
                 <p class="score" id="player-score">Player: 0</p>
             </div>
             <div class="score-box">
-                <div class="sign">❔</div>
+                <div class="sign" id="sign-computer">❔</div>
                 <p class="score" id="computer-score">Computer: 0</p>
             </div>
 
         </div>
 
         <div class="buttons-container">
-            <div class="button" id="rock" data-choice="rock">
+            <button class="btn_rock" id="rock" data-choice="rock">
                 <div class="sign">✊</div>
-            </div>
-            <div class="button" id="paper" data-choice="paper">
+                </button>
+            
+            <button class="btn_paper"  id="paper" data-choice="paper">
                 <div class="sign">✋</div>
-            </div>
-            <div class="button" id="scissors" data-choice="scissors">
+                </button>
+            
+            <button class="btn_scissors"  id="scissors" data-choice="scissors">
                 <div class="sign">✌</div>
-            </div>
-
+            </button>
+            
+        </div>
         </div>
         </div>
         </div>
@@ -48,6 +51,6 @@
 
     <div class="footer">Copyright © 2023 kamilmachel</div>
 
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
