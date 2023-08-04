@@ -54,6 +54,9 @@ h1 {
     background-color: darkgray;
 }
 
+.button:hover {
+    cursor: pointer;
+}
 
 .footer {
     display: flex;

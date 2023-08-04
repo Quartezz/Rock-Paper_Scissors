@@ -1,3 +1,7 @@
+let playerScore = 0;
+let computerScore = 0;
+const winningScore = 5;
+
 const rockButton = document.getElementById("rock");
 const paperButton = document.getElementById("paper");
 const scissorsButton = document.getElementById("scissors");
@@ -42,6 +46,14 @@ function handleButtonClick(e) {
     }
 }
 
+function updateScores() {
+    const playerScoreElement = document.getElementById("player-score");
+    const computerScoreElement = document.getElementById("computer-score");
+    
+    playerScoreElement.textContent = `Player: ${playerScore}`;
+    computerScoreElement.textContent = `Computer: ${computerScore}`;
+}
+
 function compareChoices(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
         return "tie";
@@ -50,25 +62,30 @@ function compareChoices(playerChoice, computerChoice) {
         (playerChoice === "paper" && computerChoice === "rock") ||
         (playerChoice === "scissors" && computerChoice === "paper")
     ) {
+        playerScore++;
+        updateScores();
         return "win";
     } else {
+        computerScore++;
+        updateScores();
         return "lose";
     }
 }
 
-function updateResultText(result) {
+function updateResultText(result, playerChoice, computerChoice) {
     const resultText = document.getElementById("result");
     const resultText2 = document.getElementById("result-text")
     
     if (result === "win") {
         resultText.textContent = "You win!";
-        resultText2.textContent = "${playerChoice} beats ${computerChoice}!"
+        resultText2.textContent = `${playerChoice} beats ${computerChoice}!`;
     } else if (result === "lose") {
         resultText.textContent = "You lose!";
-        resultText2.textContent = "${playerChoice} loses to ${computerChoice}!"
+        resultText2.textContent = `${playerChoice} loses to ${computerChoice}!`;
     } else {
         resultText.textContent = "It's a tie!";
         resultText2.textContent = "No points!"
     }
 }
 
+updateScores();
