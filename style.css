@@ -76,6 +76,11 @@ button:hover {
     padding: 16px;
     font-size: 32px;
     font-weight: bold;
+    gap: 10px;
+}
+
+.fa-github {
+    color: darkgray;
 }
 
 .modal {
